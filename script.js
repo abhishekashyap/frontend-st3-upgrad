@@ -46,10 +46,6 @@ form.addEventListener("submit", function clickHandler(e) {
   const mobile = document.getElementById("mobile").value;
   const email = document.getElementById("email").value;
 
-  console.log(name);
-  console.log(mobile);
-  console.log(email);
-
   if (name.length < 3) {
     alert("Name should be of minimum 3 characters long");
   } else if (mobile.length !== 10) {
