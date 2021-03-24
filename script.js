@@ -20,6 +20,26 @@ function createTableCellNode(tableRow, value) {
   tableRow.appendChild(cell);
 }
 
+function deleteRow(row) {
+  const i = row.parentNode.rowIndex;
+  document.getElementsByTagName("table")[0].deleteRow(i);
+
+  //   If row index is zero, remove the header
+  const rows = document.getElementsByTagName("tr");
+  if (i === 0 && rows.length === 0) {
+    const elements = document.getElementsByTagName("table");
+    while (elements[0]) elements[0].parentNode.removeChild(elements[0]);
+  }
+}
+
+function createDeleteRowBtn(tableRow) {
+  const btn = document.createElement("button");
+  const btnTextNode = document.createTextNode("Delete");
+  btn.appendChild(btnTextNode);
+  btn.setAttribute("onclick", "deleteRow(this)");
+  tableRow.appendChild(btn);
+}
+
 form.addEventListener("submit", function clickHandler(e) {
   e.preventDefault();
   const name = document.getElementById("name").value;
@@ -54,6 +74,7 @@ form.addEventListener("submit", function clickHandler(e) {
       createTableCellNode(row, name);
       createTableCellNode(row, mobile);
       createTableCellNode(row, email);
+      createDeleteRowBtn(row);
 
       tableBody.appendChild(row);
 
@@ -64,12 +85,12 @@ form.addEventListener("submit", function clickHandler(e) {
       createTableCellNode(row, name);
       createTableCellNode(row, mobile);
       createTableCellNode(row, email);
+      createDeleteRowBtn(row);
 
       const prevTableBody = document.getElementsByTagName("tbody")[0];
       prevTableBody.appendChild(row);
     }
   }
 
-  console.log("asdfasd");
   form.reset();
 });
